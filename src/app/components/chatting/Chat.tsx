@@ -38,7 +38,7 @@ const Chat = () => {
           </div>
 
           <div className="flex-1">
-            <div className="p-4">
+            <div className="p-2">
               <Message
                 message="Hai gaes"
                 timestamp="10:00 PAGI"
