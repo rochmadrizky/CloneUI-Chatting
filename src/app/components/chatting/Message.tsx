@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { IconCircleArrowDown } from "@tabler/icons-react";
 import ButtonReaksi, { reactions } from "./ButtonReaksi";
+import ButtonDropdown from "./ButtonDropdown";
+import DropdownReaksi from "./DropdownReaksi";
 
 interface MessageProps {
   message: string;
@@ -52,40 +53,25 @@ const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
 
             {selectedReaction && (
               <div className="absolute -bottom-2 left-0">
-                {reactions.map(
-                  (reaction, index) =>
-                    selectedReaction === reaction.type && (
-                      <div key={index}>{reaction.icon}</div>
-                    )
-                )}
+                <ButtonReaksi
+                  reactionType={selectedReaction}
+                  onClick={() => handleReactionSelect(selectedReaction || "")}
+                />
               </div>
             )}
 
-            {(isHovered || showDropdown) && (
-              <button
-                onClick={() => setShowDropdown(!showDropdown)}
-                className="text-gray-500 bg-white focus:outline-none absolute top-0 -right-1 -mt-2 -mr-2 h-6 w-6 flex items-center justify-center rounded-full"
-              >
-                <IconCircleArrowDown className="h-5 w-5" />
-              </button>
-            )}
+            <ButtonDropdown
+              showDropdown={showDropdown}
+              setShowDropdown={setShowDropdown}
+              isHovered={isHovered}
+            />
           </div>
 
-          <div ref={dropdownRef} className="relative">
-            {showDropdown && (
-              <div className="absolute -top-4 left-2 bg-gray-100 rounded-lg  p-1 shadow-md">
-                <div className="flex items-center justify-center gap-1">
-                  {reactions.map((reaction, index) => (
-                    <ButtonReaksi
-                      key={index}
-                      reactionType={reaction.type}
-                      onClick={() => handleReactionSelect(reaction.type)}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+          <DropdownReaksi
+            showDropdown={showDropdown}
+            reactions={reactions} // Pastikan untuk melewatkan data reactions yang sesuai
+            handleReactionSelect={handleReactionSelect}
+          />
         </div>
       </div>
     </div>
