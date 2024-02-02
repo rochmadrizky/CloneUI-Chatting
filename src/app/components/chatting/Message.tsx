@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  IconCircleArrowDown,
-  IconHeartFilled,
-  IconThumbUpFilled,
-} from "@tabler/icons-react";
-import ButtonReaksi from "./ButtonReaksi";
+import { IconCircleArrowDown } from "@tabler/icons-react";
+import ButtonReaksi, { reactions } from "./ButtonReaksi";
 
 interface MessageProps {
   message: string;
@@ -35,7 +31,7 @@ const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
   }, []);
 
   const handleReactionSelect = (reaction: string) => {
-    setSelectedReaction(reaction);
+    setSelectedReaction(reaction === selectedReaction ? null : reaction);
     setShowDropdown(false);
   };
 
@@ -56,11 +52,11 @@ const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
 
             {selectedReaction && (
               <div className="absolute -bottom-2 left-0">
-                {selectedReaction === "thumbs-up" && (
-                  <IconThumbUpFilled className="text-blue-500 h-4 w-4" />
-                )}
-                {selectedReaction === "heart" && (
-                  <IconHeartFilled className="text-red-500 h-4 w-4" />
+                {reactions.map(
+                  (reaction, index) =>
+                    selectedReaction === reaction.type && (
+                      <div key={index}>{reaction.icon}</div>
+                    )
                 )}
               </div>
             )}
@@ -79,14 +75,13 @@ const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
             {showDropdown && (
               <div className="absolute -top-4 left-2 bg-gray-100 rounded-lg  p-1 shadow-md">
                 <div className="flex items-center justify-center gap-1">
-                  <ButtonReaksi
-                    reactionType="thumbs-up"
-                    onClick={() => handleReactionSelect("thumbs-up")}
-                  />
-                  <ButtonReaksi
-                    reactionType="heart"
-                    onClick={() => handleReactionSelect("heart")}
-                  />
+                  {reactions.map((reaction, index) => (
+                    <ButtonReaksi
+                      key={index}
+                      reactionType={reaction.type}
+                      onClick={() => handleReactionSelect(reaction.type)}
+                    />
+                  ))}
                 </div>
               </div>
             )}

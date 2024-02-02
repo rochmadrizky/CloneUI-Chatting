@@ -6,19 +6,27 @@ interface ButtonReaksiProps {
   onClick: () => void;
 }
 
+export const reactions = [
+  {
+    type: "thumbs-up",
+    icon: <IconThumbUpFilled className="h-4 w-4 text-blue-500" />,
+  },
+  { type: "heart", icon: <IconHeartFilled className="h-4 w-4 text-red-500" /> },
+];
+
 const ButtonReaksi: React.FC<ButtonReaksiProps> = ({
   reactionType,
   onClick,
 }) => {
   const reactionIcons: { [key: string]: JSX.Element } = {
-    "thumbs-up": <IconThumbUpFilled className="h-4 w-4" />,
-    heart: <IconHeartFilled className="h-4 w-4" />,
+    "thumbs-up": <IconThumbUpFilled className="h-4 w-4 text-blue-500" />,
+    heart: <IconHeartFilled className="h-4 w-4 text-red-500" />,
   };
 
   return (
     <button
       onClick={onClick}
-      className="text-gray-500 hover:text-blue-500 focus:outline-none block w-full text-center"
+      className="focus:outline-none block w-full text-center"
     >
       {reactionIcons[reactionType]}
     </button>
