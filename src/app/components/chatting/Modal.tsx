@@ -1,20 +1,46 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
+  message: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onConfirm }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  message,
+}) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      onClose();
+    }
+  };
+
   return (
     <>
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-md max-w-md">
-            <p className="text-lg font-semibold mb-4">
-              Apakah dirimu mau telfon?
-            </p>
+          <div
+            className="bg-white p-6 rounded-lg shadow-md max-w-md"
+            ref={modalRef}
+          >
+            <p className="text-lg font-semibold mb-4">{message}</p>
             <div className="flex items-center justify-between">
               <button
                 onClick={onClose}
