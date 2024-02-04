@@ -25,9 +25,18 @@ const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
       }
     }
 
+    function handleKeyPress(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setShowDropdown(false);
+      }
+    }
+
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyPress);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyPress);
     };
   }, [dropdownRef]);
 
