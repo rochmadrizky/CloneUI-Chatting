@@ -15,10 +15,18 @@ const DropdownMenu = () => {
       }
     };
 
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
     window.addEventListener("click", handleOutsideClick);
+    window.addEventListener("keydown", handleKeyPress);
 
     return () => {
       window.removeEventListener("click", handleOutsideClick);
+      window.removeEventListener("keydown", handleKeyPress);
     };
   }, []);
 
