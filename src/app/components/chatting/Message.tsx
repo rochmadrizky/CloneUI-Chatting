@@ -49,7 +49,7 @@ const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
         >
           <div className="bg-blue-200 p-2 rounded-lg relative">
             <div className="flex items-center gap-2">
-              <p className="text-sm">{message}</p>
+              <p className=" text-base">{message}</p>
             </div>
 
             {selectedReaction && (

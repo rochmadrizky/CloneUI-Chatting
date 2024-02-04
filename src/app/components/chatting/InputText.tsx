@@ -18,8 +18,8 @@ const InputText: React.FC<InputTextProps> = ({
       type="text"
       className="w-full border rounded-md px-2 py-1 focus:outline-none focus:border-blue-500"
       placeholder={placeholder}
-      value={value} // Gunakan nilai value
-      onChange={onChange} // Gunakan fungsi onChange
+      value={value}
+      onChange={onChange}
     />
   );
 };

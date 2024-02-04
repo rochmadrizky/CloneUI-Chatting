@@ -8,7 +8,7 @@ interface ButtonMenuProps {
 const ButtonMenu: React.FC<ButtonMenuProps> = ({ onClick }) => {
   return (
     <button onClick={onClick}>
-      <IconDotsVertical className=" stroke-2 text-blue-500" />
+      <IconDotsVertical className="stroke-2 text-blue-500" />
     </button>
   );
 };

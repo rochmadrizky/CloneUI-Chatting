@@ -76,8 +76,8 @@ const Chat = () => {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="max-w-xl mx-auto">
-        <div className="bg-white border h-96 rounded-lg shadow-md overflow-hidden flex flex-col">
-          <div className="flex justify-between items-center border-b p-4">
+        <div className="bg-white border h-[500px] w-80 rounded-lg shadow-md overflow-hidden flex flex-col">
+          <div className="flex justify-between items-center border-b p-3">
             <Contact
               name="Dia"
               photoUrl="https://fastly.picsum.photos/id/658/50/50.jpg?hmac=1u2LcQ_hv8fjyRv9pXz3_HcxsgSLk8fwAKN2QVwZsn0"
@@ -109,7 +109,7 @@ const Chat = () => {
           </div>
 
           <div className="border-t">
-            <form className="flex p-4 gap-2" onSubmit={handleSubmitPesan}>
+            <form className="flex p-3 gap-2" onSubmit={handleSubmitPesan}>
               <InputText
                 placeholder="Tambahkan pesan ..."
                 value={pesan}

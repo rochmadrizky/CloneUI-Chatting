@@ -15,7 +15,7 @@ const DropdownReaksi: React.FC<DropdownReaksiProps> = ({
   return (
     <div className="relative">
       {showDropdown && (
-        <div className="absolute -top-4 left-2 bg-gray-100 rounded-lg p-1 shadow-md">
+        <div className="absolute -top-9 -right-5 bg-gray-100 rounded-lg p-1 shadow-md">
           <div className="flex items-center justify-center gap-1">
             {Object.keys(reactions).map((reactionType, index) => (
               <ButtonReaksi
