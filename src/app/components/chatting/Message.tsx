@@ -29,7 +29,7 @@ const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [dropdownRef]);
 
   const handleReactionSelect = (reaction: string) => {
     setSelectedReaction(reaction === selectedReaction ? null : reaction);
@@ -42,6 +42,7 @@ const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
         <p className="text-xs text-gray-500">{timestamp}</p>
 
         <div
+          ref={dropdownRef}
           className="flex items-center justify-center"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -69,7 +70,7 @@ const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
 
           <DropdownReaksi
             showDropdown={showDropdown}
-            reactions={reactions} // Pastikan untuk melewatkan data reactions yang sesuai
+            reactions={reactions}
             handleReactionSelect={handleReactionSelect}
           />
         </div>
