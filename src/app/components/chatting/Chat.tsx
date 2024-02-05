@@ -96,7 +96,7 @@ const Chat = () => {
               </p>
             )}
 
-            <div className="p-2">
+            <div className="py-2 pl-2 pr-8">
               {pesanList.map((pesan, index) => (
                 <Message
                   key={index}

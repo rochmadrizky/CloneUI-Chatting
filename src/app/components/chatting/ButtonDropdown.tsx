@@ -14,11 +14,12 @@ const ButtonDropdown: React.FC<ButtonDropdownProps> = ({
   isHovered,
 }) => {
   return (
+    // RizyEver
     <>
       {(isHovered || showDropdown) && (
         <button
           onClick={() => setShowDropdown(!showDropdown)}
-          className="text-gray-500 bg-white focus:outline-none absolute top-[14px] -right-3 -mt-2 -mr-2 h-6 w-6 flex items-center justify-center rounded-full"
+          className="text-gray-500 bg-white focus:outline-none absolute top-0 right-0 h-6 w-6 flex items-center justify-center rounded-md"
         >
           <IconCircleArrowDown className="h-5 w-5" />
         </button>
