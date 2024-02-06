@@ -118,7 +118,7 @@ const Chat = () => {
           <div className="border-t">
             {replyingTo && (
               <div className="bg-gray-100 p-2 mb-2 rounded-lg">
-                Replying to: {replyingTo.sender} - {replyingTo.message}
+                {replyingTo.message}
                 <button
                   onClick={() => setReplyingTo(null)}
                   className="ml-2 text-red-500"
