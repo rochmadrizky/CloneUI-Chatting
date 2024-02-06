@@ -5,7 +5,7 @@ import InputText from "./InputText";
 import Message from "./Message";
 import Modal from "./Modal";
 import Contact from "./Contact";
-import DropdownMenu from "./DropdownMenu"; // Import DropdownMenu
+import DropdownMenu from "./DropdownMenu";
 import { IconSend } from "@tabler/icons-react";
 
 interface Pesan {
@@ -20,6 +20,7 @@ const Chat = () => {
   const [pesan, setPesan] = useState("");
   const [modalMessage, setModalMessage] = useState(""); // State untuk pesan modal
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State untuk menentukan apakah dropdown terbuka atau tidak
+  const [replyingTo, setReplyingTo] = useState<Pesan | null>(null);
 
   useEffect(() => {
     // Menambahkan event listener ketika komponen dimount
@@ -64,6 +65,7 @@ const Chat = () => {
         { message: pesan, timestamp: waktu, sender: pengirim },
       ]);
       setPesan("");
+      setReplyingTo(null);
     }
   };
 
@@ -71,6 +73,10 @@ const Chat = () => {
   const handleCallClick = (option: string) => {
     setModalMessage(`Apakah dirimu mau melakukan panggilan ${option}?`);
     handleAttachClick(); // Munculkan modal setelah mengatur pesan
+  };
+
+  const startReply = (messageProps: Pesan) => {
+    setReplyingTo(messageProps);
   };
 
   return (
@@ -103,12 +109,25 @@ const Chat = () => {
                   message={pesan.message}
                   timestamp={pesan.timestamp}
                   sender={pesan.sender}
+                  startReply={() => startReply(pesan)}
                 />
               ))}
             </div>
           </div>
 
           <div className="border-t">
+            {replyingTo && (
+              <div className="bg-gray-100 p-2 mb-2 rounded-lg">
+                Replying to: {replyingTo.sender} - {replyingTo.message}
+                <button
+                  onClick={() => setReplyingTo(null)}
+                  className="ml-2 text-red-500"
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+
             <form className="flex p-3 gap-2" onSubmit={handleSubmitPesan}>
               <InputText
                 placeholder="Tambahkan pesan ..."

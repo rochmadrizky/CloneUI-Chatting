@@ -7,9 +7,14 @@ interface MessageProps {
   message: string;
   timestamp: string;
   sender: string;
+  startReply: () => void;
 }
 
-const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
+const Message: React.FC<MessageProps> = ({
+  message,
+  timestamp,
+  startReply,
+}) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedReaction, setSelectedReaction] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -76,6 +81,13 @@ const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
               isHovered={isHovered}
             />
           </div>
+
+          <button
+            onClick={startReply}
+            className="text-sm text-blue-500 underline"
+          >
+            Reply
+          </button>
 
           <DropdownReaksi
             showDropdown={showDropdown}
