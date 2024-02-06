@@ -9,7 +9,7 @@ interface MessageProps {
   sender: string;
 }
 
-const Message: React.FC<MessageProps> = ({ message, timestamp, sender }) => {
+const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedReaction, setSelectedReaction] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
