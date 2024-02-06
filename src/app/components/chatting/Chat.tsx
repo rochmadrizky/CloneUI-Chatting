@@ -18,14 +18,12 @@ const Chat = () => {
   const [pesanList, setPesanList] = useState<Pesan[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pesan, setPesan] = useState("");
-  const [modalMessage, setModalMessage] = useState(""); // State untuk pesan modal
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State untuk menentukan apakah dropdown terbuka atau tidak
-  const [replyingTo, setReplyingTo] = useState<Pesan | null>(null);
+  const [modalMessage, setModalMessage] = useState(""); //
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
-    // Menambahkan event listener ketika komponen dimount
     document.addEventListener("mousedown", handleClickOutside);
-    // Membersihkan event listener saat komponen di-unmount
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -34,7 +32,6 @@ const Chat = () => {
   const handleClickOutside = (event: MouseEvent) => {
     const dropdownMenu = document.getElementById("");
     if (dropdownMenu && !dropdownMenu.contains(event.target as Node)) {
-      // Menutup dropdown jika klik di luar area dropdown
       setIsDropdownOpen(false);
     }
   };
@@ -60,23 +57,19 @@ const Chat = () => {
         hour12: false,
       });
       const pengirim = "Pengguna";
+
       setPesanList([
         ...pesanList,
         { message: pesan, timestamp: waktu, sender: pengirim },
       ]);
+
       setPesan("");
-      setReplyingTo(null);
     }
   };
 
-  // Mengatur pesan modal berdasarkan opsi panggilan yang dipilih
   const handleCallClick = (option: string) => {
     setModalMessage(`Apakah dirimu mau melakukan panggilan ${option}?`);
-    handleAttachClick(); // Munculkan modal setelah mengatur pesan
-  };
-
-  const startReply = (messageProps: Pesan) => {
-    setReplyingTo(messageProps);
+    handleAttachClick();
   };
 
   return (
@@ -90,8 +83,8 @@ const Chat = () => {
             />
             <DropdownMenu
               onCallClick={handleCallClick}
-              isDropdownOpen={isDropdownOpen} // Meneruskan state isDropdownOpen ke DropdownMenu
-              setIsDropdownOpen={setIsDropdownOpen} // Meneruskan setter setIsDropdownOpen ke DropdownMenu
+              isDropdownOpen={isDropdownOpen}
+              setIsDropdownOpen={setIsDropdownOpen}
             />
           </div>
 
@@ -109,25 +102,12 @@ const Chat = () => {
                   message={pesan.message}
                   timestamp={pesan.timestamp}
                   sender={pesan.sender}
-                  startReply={() => startReply(pesan)}
                 />
               ))}
             </div>
           </div>
 
           <div className="border-t">
-            {replyingTo && (
-              <div className="bg-gray-100 p-2 mb-2 rounded-lg">
-                {replyingTo.message}
-                <button
-                  onClick={() => setReplyingTo(null)}
-                  className="ml-2 text-red-500"
-                >
-                  Cancel
-                </button>
-              </div>
-            )}
-
             <form className="flex p-3 gap-2" onSubmit={handleSubmitPesan}>
               <InputText
                 placeholder="Tambahkan pesan ..."
@@ -148,7 +128,7 @@ const Chat = () => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onConfirm={handleConfirmModal}
-        message={modalMessage} // Meneruskan pesan modal ke komponen Modal
+        message={modalMessage}
       />
     </div>
   );

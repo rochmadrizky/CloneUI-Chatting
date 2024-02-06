@@ -7,14 +7,9 @@ interface MessageProps {
   message: string;
   timestamp: string;
   sender: string;
-  startReply: () => void;
 }
 
-const Message: React.FC<MessageProps> = ({
-  message,
-  timestamp,
-  startReply,
-}) => {
+const Message: React.FC<MessageProps> = ({ message, timestamp, sender }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedReaction, setSelectedReaction] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -66,34 +61,29 @@ const Message: React.FC<MessageProps> = ({
               <p className="text-base break-all">{message}</p>
             </div>
 
+            <ButtonDropdown
+              showDropdown={showDropdown}
+              setShowDropdown={setShowDropdown}
+              isHovered={isHovered}
+            />
+
             {selectedReaction && (
-              <div className="absolute -bottom-2 left-0">
+              <div className="absolute bottom-0 left-0">
                 <ButtonReaksi
                   reactionType={selectedReaction}
                   onClick={() => handleReactionSelect(selectedReaction || "")}
                 />
               </div>
             )}
-
-            <ButtonDropdown
-              showDropdown={showDropdown}
-              setShowDropdown={setShowDropdown}
-              isHovered={isHovered}
-            />
           </div>
 
-          <button
-            onClick={startReply}
-            className="text-sm text-blue-500 underline"
-          >
-            Reply
-          </button>
-
-          <DropdownReaksi
-            showDropdown={showDropdown}
-            reactions={reactions}
-            handleReactionSelect={handleReactionSelect}
-          />
+          <div className="mt-1">
+            <DropdownReaksi
+              showDropdown={showDropdown}
+              reactions={reactions}
+              handleReactionSelect={handleReactionSelect}
+            />
+          </div>
         </div>
       </div>
     </div>
