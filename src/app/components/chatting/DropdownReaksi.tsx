@@ -13,10 +13,10 @@ const DropdownReaksi: React.FC<DropdownReaksiProps> = ({
   handleReactionSelect,
 }) => {
   return (
-    <div className="relative">
+    <div className="relative flex items-center p-1">
       {showDropdown && (
-        <div className="absolute -top-9 -right-5 bg-gray-100 rounded-lg p-1 shadow-md">
-          <div className="flex items-center justify-center gap-1">
+        <div className="absolute bg-gray-100 rounded-lg p-1 shadow-md">
+          <div className="space-y-2">
             {Object.keys(reactions).map((reactionType, index) => (
               <ButtonReaksi
                 key={index}

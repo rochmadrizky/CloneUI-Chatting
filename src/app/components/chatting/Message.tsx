@@ -57,18 +57,17 @@ const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
           onMouseLeave={() => setIsHovered(false)}
         >
           <div className="bg-blue-200 p-2 rounded-lg relative">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center">
               <p className="text-base break-all">{message}</p>
+              <ButtonDropdown
+                showDropdown={showDropdown}
+                setShowDropdown={setShowDropdown}
+                isHovered={isHovered}
+              />
             </div>
 
-            <ButtonDropdown
-              showDropdown={showDropdown}
-              setShowDropdown={setShowDropdown}
-              isHovered={isHovered}
-            />
-
             {selectedReaction && (
-              <div className="absolute bottom-0 left-0">
+              <div className="absolute -bottom-2 -left-1">
                 <ButtonReaksi
                   reactionType={selectedReaction}
                   onClick={() => handleReactionSelect(selectedReaction || "")}
@@ -77,7 +76,7 @@ const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
             )}
           </div>
 
-          <div className="mt-1">
+          <div className="flex items-center justify-center">
             <DropdownReaksi
               showDropdown={showDropdown}
               reactions={reactions}

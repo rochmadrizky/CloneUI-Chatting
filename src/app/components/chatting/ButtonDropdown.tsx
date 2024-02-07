@@ -1,6 +1,6 @@
 // ButtonDropdown.tsx
 import React from "react";
-import { IconCircleArrowDown } from "@tabler/icons-react";
+import { IconChevronsRight } from "@tabler/icons-react";
 
 interface ButtonDropdownProps {
   showDropdown: boolean;
@@ -14,14 +14,13 @@ const ButtonDropdown: React.FC<ButtonDropdownProps> = ({
   isHovered,
 }) => {
   return (
-    // RizyEver
     <>
       {(isHovered || showDropdown) && (
         <button
           onClick={() => setShowDropdown(!showDropdown)}
-          className="text-gray-500 bg-white focus:outline-none absolute top-0 right-0 h-6 w-6 flex items-center justify-center rounded-md"
+          className="text-gray-500 rounded-full bg-white absolute -right-1"
         >
-          <IconCircleArrowDown className="h-5 w-5" />
+          <IconChevronsRight className="h-5 w-5" />
         </button>
       )}
     </>
